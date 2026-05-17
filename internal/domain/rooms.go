@@ -27,5 +27,5 @@ type RoomPricing struct {
 type RoomRepository interface {
 	Create(ctx context.Context, room *Room) error
 	GetByID(ctx context.Context, roomID string) (*Room, error)
-	Update(ctx context.Context, room *Room) error // Owners can update room settings
+	Update(ctx context.Context, room *Room) error
 }

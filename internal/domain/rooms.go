@@ -11,10 +11,12 @@ type Room struct {
 }
 
 type CostType struct {
-	CostTypeID string `json:"cost_type_id"`
-	OwnerID    string `json:"owner_id"`
-	CostName   string `json:"cost_name"`
-	ChargeType string `json:"charge_type"`
+	CostTypeID string  `json:"cost_type_id"`
+	OwnerID    string  `json:"owner_id"`
+	RoomID     string  `json:"room_id"`
+	CostName   string  `json:"cost_name"`
+	ChargeType string  `json:"charge_type"`
+	Cost       float32 `json: "cost"`
 }
 
 type RoomPricing struct {
@@ -24,8 +26,14 @@ type RoomPricing struct {
 	CostValue  float64 `json:"cost_value"`
 }
 
+type RoomDetail struct {
+	Room
+	Pricings []RoomPricing `json:"pricings"`
+}
+
 type RoomRepository interface {
 	Create(ctx context.Context, room *Room) error
-	GetByID(ctx context.Context, roomID string) (*Room, error)
-	Update(ctx context.Context, room *Room) error
+	GetByID(ctx context.Context, id string) (*Room, error)
+	UpdateByID(ctx context.Context, room *Room) error
+	DeleteByID(ctx context.Context, id string) error
 }

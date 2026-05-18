@@ -14,4 +14,6 @@ type Owner struct {
 type OwnerRepository interface {
 	Create(ctx context.Context, owner *Owner) error
 	GetByID(ctx context.Context, id string) (*Owner, error)
+	UpdateById(ctx context.Context, owner *Owner) (*Owner, error)
+	DeleteById(ctx context.Context, id string) error
 }

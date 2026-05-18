@@ -1,4 +1,4 @@
-my-renting-service/
+Renting/
 ├── cmd/
 │   └── api/
 │       └── main.go                 # App entrypoint (initializes DB, connects layers, starts server)

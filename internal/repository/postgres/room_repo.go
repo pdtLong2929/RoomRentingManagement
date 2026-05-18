@@ -17,7 +17,7 @@ func NewPostgresRoomRepository(db *sql.DB) *PostgresRoomRepository {
 
 func (r *PostgresRoomRepository) Create(ctx context.Context, room *domain.Room) error {
 	query := `
-		INSERT INTO Rooms (Room_ID, Room_Owner_ID, Room_Number, Status, Base_Rent)
+		INSERT INTO Rooms (ID, RoomOwnerID, RoomNumber, Status, BaseRent)
 		VALUES ($1, $2, $3, $4, $5);
 	`
 	_, err := r.db.ExecContext(ctx, query,
@@ -33,9 +33,9 @@ func (r *PostgresRoomRepository) Create(ctx context.Context, room *domain.Room) 
 
 func (r *PostgresRoomRepository) GetByID(ctx context.Context, roomID string) (*domain.Room, error) {
 	query := `
-		SELECT Room_ID, Room_Owner_ID, Room_Number, Status, Base_Rent
+		SELECT ID, RoomOwnerID, RoomNumber, Status, BaseRent
 		FROM Rooms
-		WHERE Room_ID = $1;
+		WHERE ID = $1;
 	`
 
 	var room domain.Room
@@ -61,8 +61,8 @@ func (r *PostgresRoomRepository) GetByID(ctx context.Context, roomID string) (*d
 func (r *PostgresRoomRepository) Update(ctx context.Context, room *domain.Room) error {
 	query := `
 		UPDATE Rooms
-		SET Room_Number = $2, Status = $3, Base_Rent = $4
-		WHERE Room_ID = $1;
+		SET RoomNumber = $2, Status = $3, BaseRent = $4
+		WHERE ID = $1;
 	`
 
 	_, err := r.db.ExecContext(ctx, query,
